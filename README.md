@@ -1,4 +1,4 @@
-Y-Nov - B2B - Symfony
+Y-Nov - B2A - Symfony
 =====================
 
 Projet démo
