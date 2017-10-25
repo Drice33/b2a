@@ -1,0 +1,31 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} &gt; Products
+{% endblock %}
+
+{%  block body %}
+    {% if app.user.granted("ROLE_ADMIN") %}
+        <a class="btn btn-info" href="{{ path('product_add') }}">Ajouter un produit</a>
+    {% endif %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Produit</th>
+            <th class="text-right">Prix</th>
+        </tr>
+        </thead>
+    {%  for product in products %}
+        <tr>
+            <td>
+                <a href="{{ path('show_product', {'id': product.id}) }}">
+                    {{ product.title }}
+                </a>
+            </td>
+            <td class="text-right">
+                {{ product.price }} €
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

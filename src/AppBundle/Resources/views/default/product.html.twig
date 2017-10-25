@@ -1,0 +1,11 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} &gt; {{ prd.title }}
+{% endblock %}
+
+{%  block body %}
+    <h1>{{ prd.title }}</h1>
+    <p>{{ prd.description }}</p>
+    <p>Prix <mark>{{ prd.price }} €</mark></p>
+{% endblock %}

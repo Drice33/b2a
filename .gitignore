@@ -1,0 +1,7 @@
+/app/config/parameters.yml
+/var/
+/vendor/
+/web/bundles/
+/.idea/
+composer.lock
+phpunit.xml.dist
