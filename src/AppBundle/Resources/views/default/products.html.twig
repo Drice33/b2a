@@ -8,11 +8,20 @@
     {% if app.user and app.user.granted("ROLE_ADMIN") %}
         <a class="btn btn-info" href="{{ path('product_add') }}">Ajouter un produit</a>
     {% endif %}
+
     <table class="table">
         <thead>
         <tr>
-            <th>Produit</th>
-            <th class="text-right">Prix</th>
+            <th>
+                <a href="{{ path('show_products', { 'key':'title', 'dir': key == 'title' and dir == 'asc' ? 'desc' : 'asc' }) }}">
+                    Produit
+                </a>
+            </th>
+            <th class="text-right">
+                <a href="{{ path('show_products', {'key':'price', 'dir': key == 'price' and dir == 'asc' ? 'desc' : 'asc'}) }}">
+                    Prix
+                </a>
+            </th>
         </tr>
         </thead>
     {%  for product in products %}

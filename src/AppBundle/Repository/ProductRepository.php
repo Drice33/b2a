@@ -11,8 +11,9 @@ namespace AppBundle\Repository;
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findAllAsArray() {
-        return $this->createQueryBuilder('q')
+    public function findAllAsArray($key, $dir) {
+        return $this->createQueryBuilder('p')
+        	->orderBy('p.'.$key, $dir)
             ->getQuery()
             ->getArrayResult();
     }

@@ -23,22 +23,19 @@ class DefaultController extends Controller
 
     /**
      * @Route(
-     *     "/products.{_format}",
-     *     name="show_products",
-     *     defaults={"_format":"html"},
-     *     requirements={"_format": "html|json"}
+     *     "/products/{key}/{dir}",
+     *     defaults={"key":"title", "dir": "asc"},
+     *     name="show_products"
      * )
      */
-    public function showProducts(Request $request) {
+    public function showProducts(Request $request, $key, $dir) {
         $products = $this->getDoctrine()
             ->getRepository('AppBundle:Product')
-            ->findAllAsArray();
-
-        if ($request->getRequestFormat() === 'json') {
-            return new JsonResponse($products);
-        }
+            ->findAllAsArray($key, $dir);
         return $this->render('AppBundle:default:products.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'key' => $key,
+            'dir' => $dir,
         ]);
     }
 
