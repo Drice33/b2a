@@ -1,8 +1,14 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
 {% block body %}
     {{ parent() }}
     <h1>Ajout d'un nouveau produit</h1>
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+	{{ form_end(form) }}
 {% endblock body %}
 
 {% block javascript %}

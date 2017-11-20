@@ -27,8 +27,6 @@ class User extends BaseUser
 
     public function isGranted($role)
     {
-        dump($role);
-        dump($this->getRoles());
         return in_array($role, $this->getRoles());
     }
 }

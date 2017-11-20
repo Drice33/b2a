@@ -2,8 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -53,8 +58,25 @@ class DefaultController extends Controller
      */
     public function addProducts(Request $request) {
 
-        return $this->render('AppBundle:default:product_add.html.twig', [
+        $product = new Product();
+        $form = $this->createFormBuilder($product)
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('price', MoneyType::class)
+            ->add('submit', SubmitType::class)
+            ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newProd = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newProd);
+            $em->flush();
+        }
+
+        return $this->render('AppBundle:default:product_add.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 

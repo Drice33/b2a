@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="{{ path('homepage') }}">Mon site</a>
+    <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'home.mywebsite'|trans }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="navbars">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ path('homepage') }}">{{ 'home.home'|trans }} <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('show_products') }}">Products</a>
+                <a class="nav-link" href="{{ path('show_products') }}">{{ 'home.products'|trans }}</a>
             </li>
             <li>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -37,8 +37,11 @@
             </li>
         </ul>
     </div>
+    <ul class="navbar-nav navbar-right">
+        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}">FR</a></li> -
+        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">EN</a></li>
+    </ul>
 </nav>
-
 <main role="main" class="container">
 {%  block body %}
 
