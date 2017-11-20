@@ -19,15 +19,14 @@
 
     <div class="collapse navbar-collapse" id="navbars">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item{{ app.request.get('_route') == 'homepage' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ path('homepage') }}">{{ 'home.home'|trans }} <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item{{ app.request.get('_route') == 'show_products' or app.request.get('_route') == 'show_product' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ path('show_products') }}">{{ 'home.products'|trans }}</a>
             </li>
-            <li>
+            <li class="nav-item">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |#}
                     <a class="nav-link" href="{{ path('fos_user_security_logout') }}">
                         {{ app.user.username }} {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                     </a>
