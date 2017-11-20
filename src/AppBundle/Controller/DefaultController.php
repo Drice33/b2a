@@ -54,7 +54,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin/product/add", name="product_add")
+     * @Route("/product_add", name="product_add")
      */
     public function addProducts(Request $request) {
 

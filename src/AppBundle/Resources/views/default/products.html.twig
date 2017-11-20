@@ -5,7 +5,7 @@
 {% endblock %}
 
 {%  block body %}
-    {% if app.user.granted("ROLE_ADMIN") %}
+    {% if app.user and app.user.granted("ROLE_ADMIN") %}
         <a class="btn btn-info" href="{{ path('product_add') }}">Ajouter un produit</a>
     {% endif %}
     <table class="table">
